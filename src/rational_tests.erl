@@ -168,6 +168,12 @@ mixed_numbers_test() ->
     ?assertEqual(18, rational:numerator(Product)),
     ?assertEqual(4, rational:denominator(Product)).
 
+reciprocal_test() ->
+    A = rational:new(3, 4),
+    Reciprocal = rational:reciprocal(A),
+    ?assertEqual(4, rational:numerator(Reciprocal)),
+    ?assertEqual(3, rational:denominator(Reciprocal)).
+
 divide_test() ->
     A = rational:new(1, 2),
     B = rational:new(3, 4),
