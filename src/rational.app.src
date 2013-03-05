@@ -1,0 +1,12 @@
+{application, rational,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { rational_app, []}},
+  {env, []}
+ ]}.
