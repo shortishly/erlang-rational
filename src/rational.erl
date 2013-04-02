@@ -66,40 +66,34 @@ simplify(#fraction{numerator = Numerator, denominator = Denominator} = F) ->
 	    new(Numerator div GCD, Denominator div GCD)
     end.
 
+
+comparison(Fn, 
+	#fraction{numerator = N1,
+		  denominator = D1},
+	#fraction{numerator = N2,
+		  denominator = D2}) ->
+    Fn(N1 * D2, N2 * D1).
+
+
 -spec is_greater_than(fraction(), fraction()) -> boolean().
-is_greater_than(#fraction{numerator = N1,
-			  denominator = D1},
-		#fraction{numerator = N2,
-			  denominator = D2}) ->
-    (N1 * D2) > (N2 * D1).
+is_greater_than(F1, F2) ->
+    comparison(fun erlang:'>'/2, F1, F2).
 
 -spec is_less_than(fraction(), fraction()) -> boolean().
-is_less_than(#fraction{numerator = N1,
-		       denominator = D1},
-	     #fraction{numerator = N2,
-		       denominator = D2}) ->
-    (N1 * D2) < (N2 * D1).
+is_less_than(F1, F2) ->
+    comparison(fun erlang:'<'/2, F1, F2).
 
 -spec is_equal_to(fraction(), fraction()) -> boolean().
-is_equal_to(#fraction{numerator = N1,
-		      denominator = D1},
-	    #fraction{numerator = N2,
-		      denominator = D2}) ->
-    (N1 * D2) =:= (N2 * D1).
+is_equal_to(F1, F2) ->
+    comparison(fun erlang:'=='/2, F1, F2).
 
 -spec is_less_or_equal(fraction(), fraction()) -> boolean().
-is_less_or_equal(#fraction{numerator = N1,
-		      denominator = D1},
-	    #fraction{numerator = N2,
-		      denominator = D2}) ->
-    (N1 * D2) =< (N2 * D1).
+is_less_or_equal(F1, F2) ->
+    comparison(fun erlang:'=<'/2, F1, F2).
 
 -spec is_greater_or_equal(fraction(), fraction()) -> boolean().
-is_greater_or_equal(#fraction{numerator = N1,
-		      denominator = D1},
-	    #fraction{numerator = N2,
-		      denominator = D2}) ->
-    (N1 * D2) >= (N2 * D1).
+is_greater_or_equal(F1, F2) ->
+    comparison(fun erlang:'>='/2, F1, F2).
 
 -spec to_float(fraction()) -> float().
 to_float(#fraction{numerator = Numerator,
